@@ -1,0 +1,13 @@
+{
+  "host": "localhost",
+  "port": 3030,
+  "public": "../public/",
+  "paginate": {
+    "default": 20,
+    "max": 500
+  },
+  "mssql": {
+    "client": "mssql",
+    "connection": "mssql://tms:Sinetong9977@27.254.174.191/tms"
+  }
+}

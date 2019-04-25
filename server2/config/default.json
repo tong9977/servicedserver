@@ -1,0 +1,13 @@
+{
+  "host": "localhost",
+  "port": 3030,
+  "public": "../public/",
+  "paginate": {
+    "default": 10,
+    "max": 50
+  },
+  "mssql": {
+    "client": "mssql",
+    "connection": "mssql://ors:Sinetong9977@27.254.174.191/servicedDB12_20190418_2225"
+  }
+}
