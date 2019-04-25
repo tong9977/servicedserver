@@ -31,6 +31,8 @@ const store = new Vuex.Store({
         service('technician-belong',{modelName:'TechnicianBelong', idField:'TechnicianBelongID'}),
 
         service('report',{modelName:'Report'}),
+        service('reportbycustomer',{modelName:'Reportbycustomer'}),
+        
     ]
 })
 

@@ -17,7 +17,7 @@ class Service {
     });
 
     //Context.tbRequests.Where(c => c.ReqTime.Year.ToString() == year && c.ZoneID == Convert.ToInt32(zoneID) && c.Status != "00" && !c.Status.StartsWith("9")).ToList();
-    var rawData = await request.query().where('ReqTime','>=', params.query.start).where('ReqTime','<=', params.query.end).select('CompanyName','RequestID','DadJobType');
+    var rawData = await request.query().where('ReqTime','>=', params.query.start).where('Status', '!=', '00').where('ReqTime','<=', params.query.end).select('CompanyName','RequestID','DadJobType');
     var rawCompany = await request.query().where('ReqTime','>=', params.query.start).where('ReqTime','<=', params.query.end).distinct('CompanyName');
 
     //Test map
@@ -36,6 +36,14 @@ class Service {
       c['ไม่ใช่งานในขอบเขต'] =  f.filter(x => x.DadJobType == "ไม่ใช่งานในขอบเขต").length;
       output.push(c);
     });
+
+    var ct = {};
+    ct['หน่วยงาน'] = "รวม";
+    ct['ทั้งหมด'] = rawData.length;
+    ct['งานหลัก'] = rawData.filter(x => x.DadJobType == "งานหลัก").length;
+    ct['งานช่วย'] = rawData.filter(x => x.DadJobType == "งานช่วย").length;
+    ct['ไม่ใช่งานในขอบเขต'] = rawData.filter(x => x.DadJobType == "ไม่ใช่งานในขอบเขต").length;
+    output.push(ct);
 
     return output;
   }
