@@ -30,9 +30,10 @@ const store = new Vuex.Store({
         service('zone',{modelName:'Zone', idField:'ZoneID'}),
         service('technician-belong',{modelName:'TechnicianBelong', idField:'TechnicianBelongID'}),
 
-        service('report',{modelName:'Report'}),
-        service('reportbycustomer',{modelName:'Reportbycustomer'}),
-        
+        service('report',{modelName:'Report'}), //1
+        service('reportbycustomer',{modelName:'Reportbycustomer'}), //2
+        service('reportbycanal',{modelName:'Reportbycanal'}),
+        service('reportbyrmgroup',{modelName:'Reportbyrmgroup'}),
     ]
 })
 

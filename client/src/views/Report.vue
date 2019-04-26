@@ -38,8 +38,8 @@
 
               <div>
                 <v-tabs v-model="active" color="cyan" dark slider-color="yellow">
-                  <v-tab v-for="n in 3" :key="n" ripple>รายงานแจ้งซ่อม {{ n }}</v-tab>
-                  <v-tab-item v-for="n in 3" :key="n">
+                  <v-tab v-for="n in 4" :key="n" ripple>รายงานแจ้งซ่อม {{ n }}</v-tab>
+                  <v-tab-item v-for="n in 4" :key="n">
                     <v-card flat v-if="n === 1">
                       <v-flex md12 lg12>
                         รายงานแจ้งซ่อมแยกตามลูกค้า ประจำปี : {{yearSelect}}
@@ -110,6 +110,30 @@
                         ></ejs-grid>
                       </v-flex>
                     </v-card>
+
+                     <v-card flat v-if="n === 4">
+                      <v-flex md12 lg12>
+                        รายงานแจ้งซ่อมแยกตาม RM Group ประจำปี : {{yearSelect}}
+                        <span
+                          v-if="monthShow != null"
+                        >เดือน :</span>
+                        {{ monthShow }}
+                      </v-flex>
+                      <v-flex md12 lg12>
+                        <ejs-grid
+                          ref="grid"
+                          id="Grid"
+                          :dataSource="report4"
+                          :allowGrouping="false"
+                          :toolbar="toolbarOptions"
+                          :allowExcelExport="true"
+                          :toolbarClick="toolbarClick"
+                          :allowPaging="false"
+                          :allowSorting="true"
+                          :allowMultiSorting="true"
+                        ></ejs-grid>
+                      </v-flex>
+                    </v-card>
                   </v-tab-item>
                 </v-tabs>
               </div>
@@ -155,6 +179,8 @@ export default {
       report2: null,
       //แยกตามช่องทางการแจ้ง
       report3: null,
+      //แยกตาม RM Group
+      report4: null,
 
       years: [2019, 2018],
       yearSelect: [yyyy],
@@ -276,14 +302,23 @@ export default {
           console.log(error);
         });
 
-      // this.$store
-      //   .dispatch("reportbycanal/find", { query: q })
-      //   .then(res => {
-      //     this.report3 = res;
-      //   })
-      //   .catch(error => {
-      //     console.log(error);
-      //   });
+      this.$store
+        .dispatch("reportbycanal/find", { query: q })
+        .then(res => {
+          this.report3 = res;
+        })
+        .catch(error => {
+          console.log(error);
+        });
+
+      this.$store
+        .dispatch("reportbyrmgroup/find", { query: q })
+        .then(res => {
+          this.report4 = res;
+        })
+        .catch(error => {
+          console.log(error);
+        });
     },
 
     OK() {

@@ -5,7 +5,6 @@ class Service {
   }
 
   async find(params) {
-
     var output = [];
     const request = require('../../models/request.model')();
     //c.Status != "00" && !c.Status.StartsWith("9")
