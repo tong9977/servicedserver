@@ -72,7 +72,7 @@
               </v-card>
             </v-tab-item>
 
-            <v-tab-item>New แยกตามพื้นที่ส่วนกลาง
+            <v-tab-item>
               <v-card flat>
                 <v-flex md12 lg12>
                   รายงานแจ้งซ่อมแยกตามลูกค้า (พื้นที่ส่วนกลาง) ประจำปี : {{yearSelect}}

@@ -11,6 +11,8 @@ const reporttechnicianbelongperson = require('./reporttechnicianbelongperson/rep
 
 const techcnician = require('./techcnician/techcnician.service.js');
 
+const techniciansupport = require('./techniciansupport/techniciansupport.service.js');
+
 // eslint-disable-next-line no-unused-vars
 module.exports = function (app) {
   app.configure(company);
@@ -22,4 +24,5 @@ module.exports = function (app) {
   app.configure(reporttechnicianbelong);
   app.configure(reporttechnicianbelongperson);
   app.configure(techcnician);
+  app.configure(techniciansupport);
 };
