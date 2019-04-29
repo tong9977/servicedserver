@@ -7,7 +7,10 @@ class Service {
   }
 
   async find(params) {
-    var output = [];
+    var output = [{
+      summary:[],
+      data:[]
+    }];
 
     let listMonth = [
       {
@@ -82,7 +85,7 @@ class Service {
       c['งานช่วย'] = f.filter(x => x.DadJobType == "งานช่วย").length;
       c['ไม่ใช่งานในขอบเขต'] = f.filter(x => x.DadJobType == "ไม่ใช่งานในขอบเขต").length;
 
-      output.push(c);
+      output[0].data.push(c);
     }
 
     var ct = {};
@@ -92,11 +95,8 @@ class Service {
     ct['งานช่วย'] = rawData.filter(x => x.DadJobType == "งานช่วย").length;
     ct['ไม่ใช่งานในขอบเขต'] = rawData.filter(x => x.DadJobType == "ไม่ใช่งานในขอบเขต").length;
 
-    output.push(ct);
-
-
-
-
+    output[0].summary.push(ct);
+    
     return output;
   }
 

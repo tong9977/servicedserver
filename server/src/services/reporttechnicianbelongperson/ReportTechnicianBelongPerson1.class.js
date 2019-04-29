@@ -95,17 +95,17 @@ class Service {
       var totalRate1 = f.filter(x => x.Rate1 != null).reduce((temp, item) => {
         return temp + item.Rate1;
       }, 0);
-      c['ข้อที่ 1'] = totalRate1;
+      c['ข้อที่1'] = totalRate1;
 
       var totalRate2 = f.filter(x => x.Rate2 != null).reduce((temp, item) => {
         return temp + item.Rate2;
       }, 0);
-      c['ข้อที่ 2'] = totalRate2;
+      c['ข้อที่2'] = totalRate2;
 
       var totalRate3 = f.filter(x => x.Rate3 != null).reduce((temp, item) => {
         return temp + item.Rate3;
       }, 0);
-      c['ข้อที่ 3'] = totalRate3;
+      c['ข้อที่3'] = totalRate3;
 
       var rateTotal = f.filter(x => x.RateAvg != null).reduce((temp, item) => {
         return temp + item.RateAvg;
@@ -131,17 +131,17 @@ class Service {
     var totalRate1 = f.filter(x => x.Rate1 != null).reduce((temp, item) => {
       return temp + item.Rate1;
     }, 0);
-    ct['ข้อที่ 1'] = totalRate1;
+    ct['ข้อที่1'] = totalRate1;
 
     var totalRate2 = f.filter(x => x.Rate2 != null).reduce((temp, item) => {
       return temp + item.Rate2;
     }, 0);
-    ct['ข้อที่ 2'] = totalRate2;
+    ct['ข้อที่2'] = totalRate2;
 
     var totalRate3 = f.filter(x => x.Rate3 != null).reduce((temp, item) => {
       return temp + item.Rate3;
     }, 0);
-    ct['ข้อที่ 3'] = totalRate3;
+    ct['ข้อที่3'] = totalRate3;
 
     var rateTotal = f.filter(x => x.RateAvg != null).reduce((temp, item) => {
       return temp + item.RateAvg;

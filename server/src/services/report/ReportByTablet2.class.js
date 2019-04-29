@@ -8,13 +8,17 @@ class Service {
   }
 
   async find(params) {
+    var output = [{
+      summary:[],
+      data:[]
+    }];
+
     let prStart = params.query.start;
     let prEnd = params.query.end;
 
     let start = dateFns.format(prStart, "YYYY-MM-DDT00:00:00");
     let end = dateFns.format(prEnd, "YYYY-MM-DDT23:59:59");
 
-    var output = [];
     const request = require('../../models/request.model')();
     var rawData = await request.query().where('ReqTime', '>=', start).where('ReqTime', '<=', end).where('RequestChannel', 'A').select('RequestID','JobTypeID','CheckPointID','CheckPointName');
 
@@ -36,14 +40,12 @@ class Service {
       c['ถังขยะเต็ม'] = f.filter(x => x.JobTypeID == 299).length;;
       c['มีแมลง/สัตว์รบกวน'] = f.filter(x => x.JobTypeID == 26).length;;
 
-      output.push(c);
+      output[0].data.push(c);
     });
 
     var ct = {};
 
-    
-    
-    output.push(ct);
+    output[0].summary.push(ct);
 
     return output;
   }

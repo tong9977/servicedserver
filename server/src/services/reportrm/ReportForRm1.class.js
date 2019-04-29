@@ -7,7 +7,10 @@ class Service {
   }
 
   async find(params) {
-    var output = [];
+    var output = [{
+      summary:[],
+      data:[]
+    }];
 
     let listMonth = [
       {
@@ -91,7 +94,7 @@ class Service {
       }, 0);
       c['ผลประเมินเฉลี่ย'] = (rateTotal / g.filter(x => x.RateAvg != null).length).toFixed(2);
 
-      output.push(c);
+      output[0].data.push(c);
     }
 
     var ct = {};
@@ -108,7 +111,7 @@ class Service {
     }, 0);
     ct['ผลประเมินเฉลี่ย'] = (rateSumTotal / rawDataReq.filter(x => x.RateAvg != null).length).toFixed(2);
 
-    output.push(ct);
+    output[0].summary.push(ct);
 
     return output;
   }

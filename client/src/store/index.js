@@ -47,7 +47,7 @@ const store = new Vuex.Store({
 
         service('reporttechnicianbelong1',{modelName:'ReportTechnicianBelong1'}), //1
 
-        service('reporttechnicianbelongperson1',{modelName:'ReportTechnicianBelongPerson'}), //1
+        service('reporttechnicianbelongperson1',{modelName:'ReportTechnicianBelongPerson1'}), //1
     ]
 })
 

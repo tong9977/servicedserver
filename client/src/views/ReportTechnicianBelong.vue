@@ -33,14 +33,15 @@
           </v-layout>
 
           <v-card flat>
-            <v-flex md12 lg12
-            >รายงานแจ้งซ่อมทีมช่าง : {{ TechnicianBelongIDSelect.TechnicianBelongName }} ประจำปี : {{yearSelect}}
+            <v-flex
+              md12
+              lg12
+            >รายงานแจ้งซ่อมทีมช่าง : {{ TechnicianBelongIDSelect.TechnicianBelongName }} ประจำปี : {{yearSelect}}</v-flex>
+            <v-flex v-if="report1Summary != null">
+              ใบงานทั้งหมด {{report1Summary[0].ใบงาน}}
+              , ใบงานที่ประเมินทั้งหมด {{report1Summary[0].ประเมิน}}
+              , ผลประเมินเฉลี่ย {{report1Summary[0].ผลประเมินเฉลี่ย}}
             </v-flex>
-             <v-flex>
-                  <!--ใบงานทั้งหมด {{report1Summary[0].ใบงาน}}
-                   , ใบงานที่ประเมินทั้งหมด {{report1Summary[0].ประเมิน}}
-                  , ผลประเมินเฉลี่ย {{report1Summary[0].ผลประเมินเฉลี่ย}}-->
-            </v-flex> 
             <v-flex md12 lg12>
               <ejs-grid
                 ref="grid"
@@ -56,16 +57,14 @@
               ></ejs-grid>
             </v-flex>
           </v-card>
-           <v-layout wrap>
+          <v-layout wrap>
             <v-flex md12 lg12>
-                รายชื่อทีมช่างที่รับผิดชอบ ({{ techTeamTotal }} คน)
-                <ul>
-                    <li v-for="team in technicianteams">
-                        {{ team.FullName }}
-                    </li>
-                </ul>
+              รายชื่อทีมช่างที่รับผิดชอบ ({{ techTeamTotal }} คน)
+              <ul>
+                <li v-for="team in technicianteams">{{ team.FullName }}</li>
+              </ul>
             </v-flex>
-           </v-layout>
+          </v-layout>
 
           <!--</v-container> -->
         </material-card>
@@ -103,7 +102,7 @@ export default {
       TechnicianBelongs: null,
       TechnicianBelongIDSelect: {
         TechnicianBelongID: 1,
-        TechnicianBelongName: "ธพส.",
+        TechnicianBelongName: "ธพส."
       },
       years: [2019, 2018],
       yearSelect: [yyyy],
@@ -115,13 +114,11 @@ export default {
       //pageSettings: { pageSize: 20 },
       toolbarOptions: ["ExcelExport"],
       //แยกตามทีมช่าง
-        report1: null,
-        report1Summary: {
-            "ใบงาน" : "0",
-        },
-        technicianteams:null,
-        techTeamTotal:0,
-  
+      report1: null,
+      report1Summary: null,
+      technicianteams: null,
+      techTeamTotal: 0,
+
       active: null,
       text:
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
@@ -153,13 +150,11 @@ export default {
       this.$store
         .dispatch("reporttechnicianbelong1/find", { query: q })
         .then(res => {
-            //alert(JSON.stringify(res[0]));
-            this.report1 = res[0].data;
-            // alert(JSON.stringify(res[0].summary));
-            // this.report1Summary = res[0].summary;
-            //alert(JSON.stringify(res[0].technicianteam));
-            this.technicianteams = res[0].technicianteam;
-            this.techTeamTotal = this.technicianteams.length;
+          //alert(JSON.stringify(res[0]));
+          this.report1 = res[0].data;
+          this.report1Summary = res[0].summary;
+          this.technicianteams = res[0].technicianteam;
+          this.techTeamTotal = this.technicianteams.length;
         })
         .catch(error => {
           console.log(error);
@@ -174,7 +169,7 @@ export default {
     const { TechnicianBelong } = this.$FeathersVuex;
     //RMGroup
     TechnicianBelong.find().then(res => {
-        //alert(JSON.stringify(res));
+      //alert(JSON.stringify(res));
       this.TechnicianBelongs = res.data;
     });
     this.yearSelect = yyyy;

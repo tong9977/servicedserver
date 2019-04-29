@@ -5,7 +5,11 @@ class Service {
   }
 
   async find(params) {
-    var output = [];
+    var output = [{
+      summary:[],
+      data:[]
+    }];
+
     const request = require('../../models/request.model')();
     //c.Status != "00" && !c.Status.StartsWith("9")
     var rawData = await request.query().where('ReqTime', '>=', params.query.start).where('ReqTime', '<=', params.query.end).where('Status', '!=', '00').where('Status', 'not like', '9%').select('CompanyName', 'RequestID', 'RateAvg');
@@ -32,7 +36,7 @@ class Service {
 
       c['ผลประเมินเฉลี่ย'] = (rateTotal / f.filter(x => x.RateAvg != null).length).toFixed(2);
 
-      output.push(c);
+      output[0].data.push(c);
     });
 
     var ct = {};
@@ -43,11 +47,11 @@ class Service {
       return temp + item.RateAvg;
     }, 0);
     ct['ผลประเมินเฉลี่ย'] = (rateTotal / rawData.filter(x => x.RateAvg != null).length).toFixed(2);
-    output.push(ct);
+    
+    output[0].summary.push(ct);
 
     var rawDataCheckPoint = await request.query().where('ReqTime', '>=', params.query.start).where('ReqTime', '<=', params.query.end).where('Status', '!=', '00').where(x => x.CheckPointID > 0).select('CheckPointName', 'RequestID', 'RateAvg');
     var rawCheckPoint = await request.query().where('ReqTime', '>=', params.query.start).where('ReqTime', '<=', params.query.end).where('Status', '!=', '00').distinct('CheckPointName');
-
 
     return output;
   }

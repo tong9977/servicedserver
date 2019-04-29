@@ -39,6 +39,14 @@
             <v-tab-item>
               <v-card flat>
                 <v-flex md12 lg12>รายงานแจ้งซ่อม Zone : {{ RMGroupIDSelect.ZoneCode }} ประจำปี : {{yearSelect}}</v-flex>
+                <v-flex v-if="report1Summary != null">
+                  เดินตรวจทั้งหมด {{report1Summary[0].เดินตรวจ}}
+                  , ปกติทั้งหมด {{report1Summary[0].ปกติ}}
+                  , มีปัญหาเล็กน้อยทั้งหมด {{report1Summary[0].เล็กน้อย}}
+                  , มีปัญหาต้องแจ้งซ่อม {{report1Summary[0].แจ้งซ่อม}}
+                  , ใบงานที่แจ้งทั้งหมด {{report1Summary[0].ใบงาน}}
+                  , คะแนนเฉลี่ยทั้งหมด {{report1Summary[0].ผลประเมินเฉลี่ย}}
+                </v-flex>
                 <v-flex md12 lg12>
                   <ejs-grid
                     ref="grid"
@@ -59,6 +67,12 @@
             <v-tab-item>
               <v-card flat>
                 <v-flex md12 lg12>รายงานแจ้งซ่อม Zone : {{ RMGroupIDSelect.ZoneCode }} ประจำปี : {{yearSelect}}</v-flex>
+                <v-flex v-if="report2Summary != null">
+                  ใบงานทั้งหมด {{report2Summary[0].ใบงาน}}
+                  , ใบงานหลักทั้งหมด {{report2Summary[0].งานหลัก}}
+                  , ใบงานช่วยทั้งหมด {{report2Summary[0].งานช่วย}}
+                  , ใบงานไม่ใช่งานในขอบเขตทั้งหมด {{report2Summary[0].ไม่ใช่งานในขอบเขต}}
+                </v-flex>
                 <v-flex md12 lg12>
                   <ejs-grid
                     ref="grid"
@@ -126,8 +140,10 @@ export default {
       toolbarOptions: ["ExcelExport"],
       //แยกตามลูกค้า (หน่วยงาน)
       report1: null,
+      report1Summary:null,
       //แยกตามลูกค้า (พื้นที่ส่วนส่วนกลาง)
       report2: null,
+      report2Summary:null,
 
       active: null,
       text:
@@ -160,7 +176,8 @@ export default {
       this.$store
         .dispatch("reportforrm1/find", { query: q })
         .then(res => {
-          this.report1 = res;
+          this.report1 = res[0].data;
+          this.report1Summary = res[0].summary;
         })
         .catch(error => {
           console.log(error);
@@ -170,7 +187,8 @@ export default {
       this.$store
         .dispatch("reportforrm2/find", { query: q })
         .then(res => {
-          this.report2 = res;
+          this.report2 = res[0].data;
+          this.report2Summary = res[0].summary;
         })
         .catch(error => {
           console.log(error);

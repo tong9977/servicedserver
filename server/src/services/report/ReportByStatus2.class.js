@@ -8,13 +8,17 @@ class Service {
   }
 
   async find(params) {
+    var output = [{
+      summary:[],
+      data:[]
+    }];
+
     let prStart = params.query.start;
     let prEnd = params.query.end;
 
     let start = dateFns.format(prStart, "YYYY-MM-DDT00:00:00");
     let end = dateFns.format(prEnd, "YYYY-MM-DDT23:59:59");
 
-    var output = [];
     const request = require('../../models/request.model')();
     //c.Status != "00" && !c.Status.StartsWith("9")
     var rawData = await request.query().where('ReqTime', '>=', start).where('ReqTime', '<=', end).where('Status', '!=', '00').where('Status', 'not like', '9%').select('TechnicianBelong', 'RequestID','Status');
@@ -27,8 +31,8 @@ class Service {
       c['รวม'] = f.length;
       c['อยู่ระหว่างดำเนินงาน'] = f.filter(x => x.Status == '01' || x.Status == '02' || x.Status == '00').length;
       c['ดำเนินการเรียบร้อย'] = f.filter(x => x.Status == '03' || x.Status == '04').length;
-
-      output.push(c);
+      
+      output[0].data.push(c);
     });
 
     var ct = {};
@@ -36,7 +40,8 @@ class Service {
     ct['รวม'] = rawData.length;
     ct['อยู่ระหว่างดำเนินงาน'] =  rawData.filter(x => x.Status == '01' || x.Status == '02' || x.Status == '00').length;
     ct['ดำเนินการเรียบร้อย'] = rawData.filter(x => x.Status == '03' || x.Status == '04').length;
-    output.push(ct);
+    
+    output[0].summary.push(ct);
     
     return output;
   }

@@ -55,6 +55,11 @@
                   >เดือน :</span>
                   {{ monthShow }}
                 </v-flex>
+                 <v-flex v-if="report1Summary != null">
+                  ใบงานทั้งหมด {{report1Summary[0].ใบงาน}}
+                  , ประเมินทั้งหมด {{report1Summary[0].ประเมิน}}
+                  , ผลประเมินเฉลี่ยทั้งหมด {{report1Summary[0].ผลประเมินเฉลี่ย}}
+                </v-flex>
                 <v-flex md12 lg12>
                   <ejs-grid
                     ref="grid"
@@ -80,6 +85,11 @@
                     v-if="monthShow != null"
                   >เดือน :</span>
                   {{ monthShow }}
+                </v-flex>
+                <v-flex v-if="report2Summary != null">
+                  ใบงานทั้งหมด {{report2Summary[0].ใบงาน}}
+                  , ประเมินทั้งหมด {{report2Summary[0].ประเมิน}}
+                  , ผลประเมินเฉลี่ยทั้งหมด {{report2Summary[0].ผลประเมินเฉลี่ย}}
                 </v-flex>
                 <v-flex md12 lg12>
                   <ejs-grid
@@ -107,7 +117,7 @@
                   >เดือน :</span>
                   {{ monthShow }}
                 </v-flex>
-                <v-flex>
+                <v-flex v-if="report3Summary != null">
                   ใบงานทั้งหมด {{report3Summary[0].ทั้งหมด}}
                   , ใบงานหลักทั้งหมด {{report3Summary[0].งานหลัก}}
                   , ใบงานช่วยทั้งหมด {{report3Summary[0].งานช่วย}}
@@ -137,6 +147,14 @@
                 >เดือน :</span>
                 {{ monthShow }}
               </v-flex>
+              <v-flex v-if="report4Summary != null">
+                  ใบงานทั้งหมด {{report4Summary[0].ใบงาน}}
+                  , ประเมินทั้งหมด {{report4Summary[0].ประเมิน}}
+                  , แจ้งทางเว็บ {{report4Summary[0].เว็บ}}
+                  , แจ้งทาง Call Center {{report4Summary[0].CallCenter}}
+                  , RM เป็นคนแจ้ง {{report4Summary[0].RM}}
+                  , แจ้งผ่าน Tablet {{report4Summary[0].Tablet}}
+              </v-flex>
               <v-flex md12 lg12>
                 <ejs-grid
                   ref="grid"
@@ -160,6 +178,15 @@
                   v-if="monthShow != null"
                 >เดือน :</span>
                 {{ monthShow }}
+              </v-flex>
+              <v-flex v-if="report5Summary != null">
+                  เดินตรวจทั้งหมด {{report5Summary[0].เดินตรวจ}}
+                  , ใบงานทั้งหมด {{report5Summary[0].ใบงาน}}
+                  , ประเมินทั้งหมด {{report5Summary[0].ประเมิน}}
+                  , รวมข้อที่ 1 {{report5Summary[0].ข้อ1}}
+                  , รวมข้อที่ 2 {{report5Summary[0].ข้อ2}}
+                  , รวมข้อที่ 3 {{report5Summary[0].ข้อ3}}
+                  , คะแนนเฉลี่ยทั้งหมด {{report5Summary[0].คะแนนเฉลี่ย}}
               </v-flex>
               <v-flex md12 lg12>
                 <ejs-grid
@@ -185,6 +212,14 @@
                 >เดือน :</span>
                 {{ monthShow }}
               </v-flex>
+              <v-flex v-if="report6Summary != null">
+                  ใบงานทั้งหมด {{report6Summary[0].ใบงาน}}
+                  , ประเมินทั้งหมด {{report6Summary[0].ประเมิน}}
+                  , รวมข้อที่ 1 {{report6Summary[0].ข้อ1}}
+                  , รวมข้อที่ 2 {{report6Summary[0].ข้อ2}}
+                  , รวมข้อที่ 3 {{report6Summary[0].ข้อ3}}
+                  , คะแนนเฉลี่ยทั้งหมด {{report6Summary[0].คะแนนเฉลี่ย}}
+              </v-flex>
               <v-flex md12 lg12>
                 <ejs-grid
                   ref="grid"
@@ -209,6 +244,14 @@
                 >เดือน :</span>
                 {{ monthShow }}
               </v-flex>
+              <v-flex v-if="report7Summary != null">
+                  ใบงานทั้งหมด {{report7Summary[0].ใบงาน}}
+                  , ประเมินทั้งหมด {{report7Summary[0].ประเมิน}}
+                  , รวมข้อที่ 1 {{report7Summary[0].ข้อ1}}
+                  , รวมข้อที่ 2 {{report7Summary[0].ข้อ2}}
+                  , รวมข้อที่ 3 {{report7Summary[0].ข้อ3}}
+                  , คะแนนเฉลี่ยทั้งหมด {{report7Summary[0].คะแนนเฉลี่ย}}
+              </v-flex>
               <v-flex md12 lg12>
                 <ejs-grid
                   ref="grid"
@@ -224,7 +267,6 @@
                 ></ejs-grid>
               </v-flex>
             </v-tab-item>
-
             <v-tab-item>
               <v-flex md12 lg12>
                 ผลการแจ้งซ่อมผ่าน Tablet ห้องน้ำ ประจำปี : {{yearSelect}}
@@ -257,6 +299,11 @@
                 >เดือน :</span>
                 {{ monthShow }}
               </v-flex>
+              <v-flex v-if="report9Summary != null">
+                  ใบงานทั้งหมด {{report9Summary[0].รวม}}
+                  , อยู่ระหว่างดำเนินงานทั้งหมด {{report9Summary[0].อยู่ระหว่างดำเนินงาน}}
+                  , ดำเนินการเรียบร้อยทั้งหมด {{report9Summary[0].ดำเนินการเรียบร้อย}}
+              </v-flex>
               <v-flex md12 lg12>
                 <ejs-grid
                   ref="grid"
@@ -280,6 +327,11 @@
                   v-if="monthShow != null"
                 >เดือน :</span>
                 {{ monthShow }}
+              </v-flex>
+               <v-flex v-if="report10Summary != null">
+                  ใบงานทั้งหมด {{report10Summary[0].รวม}}
+                  , อยู่ระหว่างดำเนินงานทั้งหมด {{report10Summary[0].อยู่ระหว่างดำเนินงาน}}
+                  , ดำเนินการเรียบร้อยทั้งหมด {{report10Summary[0].ดำเนินการเรียบร้อย}}
               </v-flex>
               <v-flex md12 lg12>
                 <ejs-grid
@@ -337,26 +389,35 @@ export default {
       //pageSettings: { pageSize: 20 },
       toolbarOptions: ["ExcelExport"],
       //แยกตามลูกค้า (หน่วยงาน)
-      report1: null, 
+      report1: null,
+      report1Summary: null,
       //แยกตามลูกค้า (พื้นที่ส่วนส่วนกลาง)
       report2: null,
+      report2Summary: null,
       //แยกตามพื้นที่
       report3: null,
       report3Summary: null,
       //แยกตามช่องทางการแจ้ง
       report4: null,
+      report4Summary: null,
       //แยกตาม RM Group
       report5: null,
+      report5Summary: null,
       //แยกตาม ทีมช่าง
       report6: null,
+      report6Summary: null,
       //ผลการประเมิน Tablet ห้องน้ำ
       report7: null,
+      report7Summary: null,
       //ผลการแจ้งซ่อมผ่าน Tablet ห้องน้ำ
       report8: null,
+      report8Summary: null,
       //แยกตามสถานะ (RM Group)
       report9: null,
+      report9Summary: null,
       //แยกตามสถานะ (ทีมช่าง)
       report10: null,
+      report10Summary: null,
 
       years: [2019, 2018],
       yearSelect: [yyyy],
@@ -454,21 +515,23 @@ export default {
 
       // q.start = "2019-04-01T00:00:00";
       // q.end = "2019-04-01T23:59:59";
-      //แยกตามลูกค้า (หน่วยงาน)
+      //1 แยกตามลูกค้า (หน่วยงาน)
       this.$store
         .dispatch("reportbycustomer/find", { query: q })
         .then(res => {
-          this.report1 = res;
+          this.report1 = res[0].data;
+          this.report1Summary = res[0].summary;
         })
         .catch(error => {
           console.log(error);
         });
 
-      //แยกตามลูกค้า (พื้นที่ส่วนกลาง)
+      //2 แยกตามลูกค้า (พื้นที่ส่วนกลาง)
       this.$store
         .dispatch("reportbycustomer2/find", { query: q })
         .then(res => {
-          this.report2 = res;
+          this.report2 = res[0].data;
+          this.report2Summary = res[0].summary;
         })
         .catch(error => {
           console.log(error);
@@ -489,7 +552,8 @@ export default {
       this.$store
         .dispatch("reportbycanal/find", { query: q })
         .then(res => {
-          this.report4 = res;
+          this.report4 = res[0].data;
+          this.report4Summary = res[0].summary;
         })
         .catch(error => {
           console.log(error);
@@ -499,7 +563,8 @@ export default {
       this.$store
         .dispatch("reportbyrmgroup/find", { query: q })
         .then(res => {
-          this.report5 = res;
+          this.report5 =  res[0].data;
+          this.report5Summary = res[0].summary;
         })
         .catch(error => {
           console.log(error);
@@ -509,7 +574,8 @@ export default {
       this.$store
         .dispatch("reportbytechnicianbelong/find", { query: q })
         .then(res => {
-          this.report6 = res;
+          this.report6 = res[0].data;
+          this.report6Summary = res[0].summary;
         })
         .catch(error => {
           console.log(error);
@@ -519,7 +585,8 @@ export default {
       this.$store
         .dispatch("reportbytablet/find", { query: q })
         .then(res => {
-          this.report7 = res;
+          this.report7 = res[0].data;
+          this.report7Summary = res[0].summary;
         })
         .catch(error => {
           console.log(error);
@@ -529,7 +596,8 @@ export default {
       this.$store
         .dispatch("reportbytablet2/find", { query: q })
         .then(res => {
-          this.report8 = res;
+          this.report8 = res[0].data;
+          this.report8Summary = res[0].summary;
         })
         .catch(error => {
           console.log(error);
@@ -539,17 +607,19 @@ export default {
       this.$store
         .dispatch("reportbystatus/find", { query: q })
         .then(res => {
-          this.report9 = res;
+          this.report9 = res[0].data;
+          this.report9Summary = res[0].summary;
         })
         .catch(error => {
           console.log(error);
         });
 
-      //แยกตามสถานะ (ทีมช่าง)
+      //10 แยกตามสถานะ (ทีมช่าง)
       this.$store
         .dispatch("reportbystatus2/find", { query: q })
         .then(res => {
-          this.report10 = res;
+          this.report10 =  res[0].data;
+          this.report10Summary = res[0].summary;
         })
         .catch(error => {
           console.log(error);

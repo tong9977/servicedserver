@@ -5,7 +5,10 @@ class Service {
   }
 
   async find (params) {
-    var output = [];
+    var output = [{
+      summary:[],
+      data:[]
+    }];
     
     const request = require('../../models/request.model')();
     const zone = require('../../models/zone.model')();
@@ -23,20 +26,21 @@ class Service {
       var totalRate1 = f.filter(x => x.Rate1 != null).reduce((temp, item) => {
         return temp + item.Rate1;
       }, 0);
-      c['ข้อ 1'] = totalRate1;
+      c['ข้อ1'] = totalRate1;
       var totalRate2 = f.filter(x => x.Rate2 != null).reduce((temp, item) => {
         return temp + item.Rate2;
       }, 0);
-      c['ข้อ 2'] = totalRate2;
+      c['ข้อ2'] = totalRate2;
       var totalRate3 = f.filter(x => x.Rate3 != null).reduce((temp, item) => {
         return temp + item.Rate3;
       }, 0);
-      c['ข้อ 3'] = totalRate3; 
+      c['ข้อ3'] = totalRate3; 
       var totalRateAvg = f.filter(x => x.RateAvg != null).reduce((temp, item) => {
         return temp + item.RateAvg;
       }, 0);
       c['คะแนนเฉลี่ย'] = (totalRateAvg/f.filter(x => x.RateAvg  != null).length).toFixed(2);
-      output.push(c);
+
+      output[0].data.push(c);
     });
 
     var ct = {};
@@ -48,20 +52,21 @@ class Service {
     var totalSumRate1 = rawData.filter(x => x.Rate1 != null).reduce((temp, item) => {
       return temp + item.Rate1;
     }, 0);
-    ct['ข้อ 1'] = totalSumRate1;
+    ct['ข้อ1'] = totalSumRate1;
     var totalSumRate2 = rawData.filter(x => x.Rate2 != null).reduce((temp, item) => {
       return temp + item.Rate2;
     }, 0);
-    ct['ข้อ 2'] = totalSumRate2;
+    ct['ข้อ2'] = totalSumRate2;
     var totalSumRate3 = rawData.filter(x => x.Rate3 != null).reduce((temp, item) => {
       return temp + item.Rate3;
     }, 0);
-    ct['ข้อ 3'] = totalSumRate3;
+    ct['ข้อ3'] = totalSumRate3;
     var totalSumRateAvg = rawData.filter(x => x.RateAvg != null).reduce((temp, item) => {
       return temp + item.RateAvg;
     }, 0);
     ct['คะแนนเฉลี่ย'] = (totalSumRateAvg/rawData.filter(x => x.RateAvg  != null).length).toFixed(2);
-    output.push(ct);
+    
+    output[0].summary.push(ct);
 
 
     return output;

@@ -5,6 +5,10 @@ class Service {
   }
 
   async find(params) {
+    var output = [{
+      summary:[],
+      data:[]
+    }];
 
     let listMonth = [
       {
@@ -57,7 +61,6 @@ class Service {
       }
     ];
 
-    var output = [];
     const request = require('../../models/request.model')();
     //predicateREQ = predicateREQ.And(c => c.ReqTime.Year.ToString() == year && c.Status != "00" && !c.Status.StartsWith("9"));
     var rawData = await request.query().where('Status', '!=', '00').where('Status', 'not like', '9%').where('ReqTime', '>=', params.query.start).where('ReqTime', '<=', params.query.end).select('RequestID', 'ReqTime', 'RequestChannel');
@@ -68,21 +71,21 @@ class Service {
       var f = rawData.filter(x => x.ReqTime.getMonth() == i);
       c['ใบงาน'] = f.length;
       c['เว็บ'] = f.filter(x => x.RequestChannel != 'W').length;
-      c['Call Center'] = f.filter(x => x.RequestChannel != 'C').length;
+      c['CallCenter'] = f.filter(x => x.RequestChannel != 'C').length;
       c['RM'] = f.filter(x => x.RequestChannel != 'R').length;
       c['Tablet'] = f.filter(x => x.RequestChannel != 'A').length;
       
-      output.push(c);
+      output[0].data.push(c);
     };
 
     var ct = {};
     ct['เดือน'] = "รวม";
     ct['ใบงาน'] = rawData.length;
     ct['เว็บ'] = rawData.filter(x => x.RequestChannel != 'W').length;
-    ct['Call Center'] = rawData.filter(x => x.RequestChannel != 'C').length;
+    ct['CallCenter'] = rawData.filter(x => x.RequestChannel != 'C').length;
     ct['RM'] = rawData.filter(x => x.RequestChannel != 'R').length;
     ct['Tablet'] = rawData.filter(x => x.RequestChannel != 'A').length;
-    output.push(ct);
+    output[0].summary.push(ct);
 
     return output;
   }

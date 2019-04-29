@@ -50,11 +50,15 @@
             <v-flex md12 lg12
             >รายงานแจ้งซ่อมทีมช่าง : {{ TechnicianBelongIDSelect.TechnicianBelongName }} ประจำปี : {{yearSelect}}
             </v-flex>
-             <!-- <v-flex>
-                  ใบงานทั้งหมด {{report1Summary[0].ใบงาน}}
-                   , ใบงานที่ประเมินทั้งหมด {{report1Summary[0].ประเมิน}}
-                  , ผลประเมินเฉลี่ย {{report1Summary[0].ผลประเมินเฉลี่ย}}
-            </v-flex>  -->
+              <v-flex v-if="report1Summary != null">
+                  ช่างหลักทั้งหมด {{report1Summary[0].ช่างหลัก}}
+                  , ช่างเสริมทั้งหมด {{report1Summary[0].ช่างเสริม}}
+                  , ประเมินทั้งหมด {{report1Summary[0].ประเมิน}}
+                  , รวมข้อที่ 1 {{report1Summary[0].ข้อ1}}
+                  , รวมข้อที่ 2 {{report1Summary[0].ข้อ2}}
+                  , รวมข้อที่ 3 {{report1Summary[0].ข้อ3}}
+                  , คะแนนเฉลี่ยทั้งหมด {{report1Summary[0].ผลประเมินเฉลี่ย}}
+              </v-flex>
             <v-flex md12 lg12>
               <ejs-grid
                 ref="grid"
@@ -126,7 +130,7 @@ export default {
       toolbarOptions: ["ExcelExport"],
       //แยกตามทีมช่าง
         report1: null,
-        report1Summary: {},
+        report1Summary: null,
         technicianteams:null,
         techTeamTotal:0,
   
@@ -157,19 +161,14 @@ export default {
         q.year = this.yearSelect;
       }
 
-      alert(JSON.stringify(q));
+      // alert(JSON.stringify(q));
 
       //ภาพรวม
       this.$store
         .dispatch("reporttechnicianbelongperson1/find", { query: q })
         .then(res => {
-            //alert(JSON.stringify(res[0]));
             this.report1 = res[0].data;
-            // alert(JSON.stringify(res[0].summary));
-            //this.report1Summary = res[0].summary;
-            //alert(JSON.stringify(res[0].technicianteam));
-            this.technicianteams = res[0].technicianteam;
-            this.techTeamTotal = this.technicianteams.length;
+            this.report1Summary = res[0].summary;
         })
         .catch(error => {
           console.log(error);
