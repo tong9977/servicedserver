@@ -370,16 +370,16 @@ export default {
         //>=99
         //ไม่แสดงยกเลิก
         if (this.notCancelJobSelect === "1") {
-          alert(JSON.stringify(q.Status));
-          q.Status.$nin = [90, 91, 92, 93, 94, 95, 96, 97, 98, 99];
-          alert(JSON.stringify(q.Status));
+          // q.Status.$nin = [90, 91, 92, 93, 94, 95, 96, 97, 98, 99];
+          q.Status = { $nin : [90, 91, 92, 93, 94, 95, 96, 97, 98, 99] };
         }
       }
 
       if (this.dadJobTypeSelect != null) {
         //predicate.And(x => x.DadJobType != "งานสร้าง" || x.DadJobType == null);
         if (this.dadJobTypeSelect === "2") {
-          q.DadJobType = "งานสร้าง";
+          //q.DadJobType = "งานสร้าง";
+          q.DadJobType = { $nin : ["งานสร้าง"] };
         }
       }
 
