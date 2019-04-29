@@ -1,17 +1,25 @@
-const request = require('./request/request.service.js');
 const company = require('./company/company.service.js');
-const joblog = require('./joblog/joblog.service.js');
-const report = require('./report/report.service.js');
 const zone = require('./zone/zone.service.js');
-const technicianBelong = require('./technician-belong/technician-belong.service.js');
-const servicecustom = require('./servicecustom/servicecustom.service.js');
+const technicianbelong = require('./technician-belong/technician-belong.service.js');
+const request = require('./request/request.service.js');
+const report = require('./report/report.service.js');
+const reportrm = require('./reportrm/reportrm.service.js');
+
+const reporttechnicianbelong = require('./reporttechnicianbelong/reporttechnicianbelong.service.js');
+
+const reporttechnicianbelongperson = require('./reporttechnicianbelongperson/reporttechnicianbelongperson.service.js');
+
+const techcnician = require('./techcnician/techcnician.service.js');
+
 // eslint-disable-next-line no-unused-vars
 module.exports = function (app) {
-  app.configure(request);
   app.configure(company);
-  app.configure(joblog);
-  app.configure(report);
   app.configure(zone);
-  app.configure(technicianBelong);
-  app.configure(servicecustom);
+  app.configure(technicianbelong);
+  app.configure(request);
+  app.configure(report);
+  app.configure(reportrm);
+  app.configure(reporttechnicianbelong);
+  app.configure(reporttechnicianbelongperson);
+  app.configure(techcnician);
 };

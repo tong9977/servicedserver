@@ -1,7 +1,7 @@
-// Initializes the `joblog` service on path `/joblog`
+// Initializes the `techcnician` service on path `/techcnician`
 const createService = require('feathers-objection');
-const createModel = require('../../models/joblog.model');
-const hooks = require('./joblog.hooks');
+const createModel = require('../../models/techcnician.model');
+const hooks = require('./techcnician.hooks');
 
 module.exports = function (app) {
   const Model = createModel(app);
@@ -10,14 +10,14 @@ module.exports = function (app) {
   const options = {
     model: Model,
     paginate,
-    id:"JobLogID",
+    id:"TechnicianID",
   };
 
   // Initialize our service with any options it requires
-  app.use('/joblog', createService(options));
+  app.use('/techcnician', createService(options));
 
   // Get our initialized service so that we can register hooks and filters
-  const service = app.service('joblog');
+  const service = app.service('techcnician');
 
   service.hooks(hooks);
 };

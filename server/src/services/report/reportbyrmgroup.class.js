@@ -10,7 +10,7 @@ class Service {
     const request = require('../../models/request.model')();
     const zone = require('../../models/zone.model')();
 
-    var rawData = await request.query().where('ReqTime', '>=', params.query.start).where('ReqTime', '<=', params.query.end).where('Status', '!=', '00').select('ZoneID', 'RequestID', 'Rate1','Rate2','Rate3', 'RateAvg');
+    var rawData = await request.query().where('ReqTime', '>=', params.query.start).where('ReqTime', '<=', params.query.end).where('Status', '!=', '00').where('Status', 'not like', '9%').select('ZoneID', 'RequestID', 'Rate1','Rate2','Rate3', 'RateAvg');
     var rawRmGroup =  await zone.query().select('ZoneID', 'ZoneCode');
 
     rawRmGroup.forEach(rm => {
@@ -20,12 +20,49 @@ class Service {
       let f = rawData.filter(x => x.ZoneID == rm.ZoneID);
       c['ใบงาน'] = f.length;
       c['ประเมิน'] = f.filter(x => x.RateAvg != null).length;
-      c['ข้อ 1'] = f.filter(x => x.Rate1 != null).length;
-      c['ข้อ 2'] = f.filter(x => x.Rate2 != null).length;
-      c['ข้อ 3'] = f.filter(x => x.Rate3 != null).length;
-      c['คะแนนเฉลี่ย'] = f.filter(x => x.Rate3 != null).length;
+      var totalRate1 = f.filter(x => x.Rate1 != null).reduce((temp, item) => {
+        return temp + item.Rate1;
+      }, 0);
+      c['ข้อ 1'] = totalRate1;
+      var totalRate2 = f.filter(x => x.Rate2 != null).reduce((temp, item) => {
+        return temp + item.Rate2;
+      }, 0);
+      c['ข้อ 2'] = totalRate2;
+      var totalRate3 = f.filter(x => x.Rate3 != null).reduce((temp, item) => {
+        return temp + item.Rate3;
+      }, 0);
+      c['ข้อ 3'] = totalRate3; 
+      var totalRateAvg = f.filter(x => x.RateAvg != null).reduce((temp, item) => {
+        return temp + item.RateAvg;
+      }, 0);
+      c['คะแนนเฉลี่ย'] = (totalRateAvg/f.filter(x => x.RateAvg  != null).length).toFixed(2);
       output.push(c);
     });
+
+    var ct = {};
+    ct['RM Group'] = "รวม";
+    ct['เดินตรวจ'] = '0';
+    ct['ใบงาน'] =  rawData.length;
+    ct['ประเมิน'] = rawData.filter(x => x.RateAvg != null).length;
+
+    var totalSumRate1 = rawData.filter(x => x.Rate1 != null).reduce((temp, item) => {
+      return temp + item.Rate1;
+    }, 0);
+    ct['ข้อ 1'] = totalSumRate1;
+    var totalSumRate2 = rawData.filter(x => x.Rate2 != null).reduce((temp, item) => {
+      return temp + item.Rate2;
+    }, 0);
+    ct['ข้อ 2'] = totalSumRate2;
+    var totalSumRate3 = rawData.filter(x => x.Rate3 != null).reduce((temp, item) => {
+      return temp + item.Rate3;
+    }, 0);
+    ct['ข้อ 3'] = totalSumRate3;
+    var totalSumRateAvg = rawData.filter(x => x.RateAvg != null).reduce((temp, item) => {
+      return temp + item.RateAvg;
+    }, 0);
+    ct['คะแนนเฉลี่ย'] = (totalSumRateAvg/rawData.filter(x => x.RateAvg  != null).length).toFixed(2);
+    output.push(ct);
+
 
     return output;
   }

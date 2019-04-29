@@ -60,7 +60,7 @@ class Service {
     var output = [];
     const request = require('../../models/request.model')();
     //predicateREQ = predicateREQ.And(c => c.ReqTime.Year.ToString() == year && c.Status != "00" && !c.Status.StartsWith("9"));
-    var rawData = await request.query().where('Status', '!=', '00').where('ReqTime', '>=', params.query.start).where('ReqTime', '<=', params.query.end).select('RequestID', 'ReqTime', 'RequestChannel');
+    var rawData = await request.query().where('Status', '!=', '00').where('Status', 'not like', '9%').where('ReqTime', '>=', params.query.start).where('ReqTime', '<=', params.query.end).select('RequestID', 'ReqTime', 'RequestChannel');
 
     for(var i = 0; i < 12; i++){
       var c = {};
