@@ -137,10 +137,8 @@
             :dataSource="jobs"
             :allowGrouping="true"
             :toolbar="toolbarOptions"
-            height="272px"
             :allowExcelExport="true"
-            :toolbarClick="toolbarClick"
-          >
+            :toolbarClick="toolbarClick">
             <e-columns>
               <e-column field="RequestID" headerText="รหัส" width="150"></e-column>
               <e-column field="Damage" headerText="Urgent" width="120"></e-column>
@@ -254,7 +252,7 @@ export default {
       //Grid
       total: 0,
       jobs: [],
-      pageSettings: { pageSize: 10 },
+      // pageSettings: { pageSize: 10 },
       toolbarOptions: ["ExcelExport"]
     };
   },
@@ -387,9 +385,9 @@ export default {
         RequestID: -1
       };
 
-      alert(JSON.stringify(q));
+      //alert(JSON.stringify(q));
       Job.find({ query: q }).then(res => {
-        console.log(JSON.stringify(res));
+        console.log(JSON.stringify(res.data));
         this.total = res.total;
         this.jobs = res.data;
       });

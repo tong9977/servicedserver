@@ -49,13 +49,13 @@
                 </v-flex>
                 <v-flex md12 lg12>
                   <ejs-grid
-                    ref="grid"
-                    id="Grid"
+                    ref="gridReport1"
+                    id="GridReport1"
                     :dataSource="report1"
                     :allowGrouping="false"
                     :toolbar="toolbarOptions"
                     :allowExcelExport="true"
-                    :toolbarClick="toolbarClick"
+                    :toolbarClick="toolbarClickReport1"
                     :allowPaging="false"
                     :allowSorting="true"
                     :allowMultiSorting="true"
@@ -75,13 +75,13 @@
                 </v-flex>
                 <v-flex md12 lg12>
                   <ejs-grid
-                    ref="grid"
-                    id="Grid"
+                    ref="gridReport2"
+                    id="GridReport2"
                     :dataSource="report2"
                     :allowGrouping="false"
                     :toolbar="toolbarOptions"
                     :allowExcelExport="true"
-                    :toolbarClick="toolbarClick"
+                    :toolbarClick="toolbarClickReport2"
                     :allowPaging="false"
                     :allowSorting="true"
                     :allowMultiSorting="true"
@@ -155,11 +155,17 @@ export default {
     grid: [Page, Sort, Group, Toolbar, ExcelExport]
   },
   methods: {
-    //ExportExcel
-    toolbarClick(args) {
-      if (args.item.id === "Grid_excelexport") {
+    toolbarClickReport1(args) {
+      if (args.item.id === "GridReport1_excelexport") {
         // 'Grid_excelexport' -> Grid component id + _ + toolbar item name
-        this.$refs.grid.excelExport();
+        this.$refs.gridReport1.excelExport();
+      }
+    },
+
+    toolbarClickReport2(args) {
+      if (args.item.id === "GridReport2_excelexport") {
+        // 'Grid_excelexport' -> Grid component id + _ + toolbar item name
+        this.$refs.gridReport2.excelExport();
       }
     },
 

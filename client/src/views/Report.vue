@@ -62,13 +62,13 @@
                 </v-flex>
                 <v-flex md12 lg12>
                   <ejs-grid
-                    ref="grid"
-                    id="Grid"
+                    ref="gridReport1"
+                    id="GridReport1"
                     :dataSource="report1"
                     :allowGrouping="false"
                     :toolbar="toolbarOptions"
                     :allowExcelExport="true"
-                    :toolbarClick="toolbarClick"
+                    :toolbarClick="toolbarClickReport1"
                     :allowPaging="false"
                     :allowSorting="true"
                     :allowMultiSorting="true"
@@ -93,13 +93,13 @@
                 </v-flex>
                 <v-flex md12 lg12>
                   <ejs-grid
-                    ref="grid"
-                    id="Grid"
+                    ref="gridReport2"
+                    id="GridReport2"
                     :dataSource="report2"
                     :allowGrouping="false"
                     :toolbar="toolbarOptions"
                     :allowExcelExport="true"
-                    :toolbarClick="toolbarClick"
+                    :toolbarClick="toolbarClickReport2"
                     :allowPaging="false"
                     :allowSorting="true"
                     :allowMultiSorting="true"
@@ -125,12 +125,13 @@
                 </v-flex>
                 <v-flex md12 lg12>
                   <ejs-grid
-                    ref="grid"
-                    id="Grid"
+                    ref="gridReport3"
+                    id="GridReport3"
                     :dataSource="report3"
                     :allowGrouping="false"
+                    :toolbar="toolbarOptions"
                     :allowExcelExport="true"
-                    :toolbarClick="toolbarClick"
+                    :toolbarClick="toolbarClickReport3"
                     :allowPaging="false"
                     :allowSorting="true"
                     :allowMultiSorting="true"
@@ -157,13 +158,13 @@
               </v-flex>
               <v-flex md12 lg12>
                 <ejs-grid
-                  ref="grid"
-                  id="Grid"
+                  ref="gridReport4"
+                  id="GridReport4"
                   :dataSource="report4"
                   :allowGrouping="false"
                   :toolbar="toolbarOptions"
                   :allowExcelExport="true"
-                  :toolbarClick="toolbarClick"
+                  :toolbarClick="toolbarClickReport4"
                   :allowPaging="false"
                   :allowSorting="true"
                   :allowMultiSorting="true"
@@ -190,13 +191,13 @@
               </v-flex>
               <v-flex md12 lg12>
                 <ejs-grid
-                  ref="grid"
-                  id="Grid"
+                  ref="gridReport5"
+                  id="GridReport5"
                   :dataSource="report5"
                   :allowGrouping="false"
                   :toolbar="toolbarOptions"
                   :allowExcelExport="true"
-                  :toolbarClick="toolbarClick"
+                  :toolbarClick="toolbarClickReport5"
                   :allowPaging="false"
                   :allowSorting="true"
                   :allowMultiSorting="true"
@@ -222,13 +223,13 @@
               </v-flex>
               <v-flex md12 lg12>
                 <ejs-grid
-                  ref="grid"
-                  id="Grid"
+                  ref="gridReport6"
+                  id="GridReport6"
                   :dataSource="report6"
                   :allowGrouping="false"
                   :toolbar="toolbarOptions"
                   :allowExcelExport="true"
-                  :toolbarClick="toolbarClick"
+                  :toolbarClick="toolbarClickReport6"
                   :allowPaging="false"
                   :allowSorting="true"
                   :allowMultiSorting="true"
@@ -254,13 +255,13 @@
               </v-flex>
               <v-flex md12 lg12>
                 <ejs-grid
-                  ref="grid"
-                  id="Grid"
+                  ref="gridReport7"
+                  id="GridReport7"
                   :dataSource="report7"
                   :allowGrouping="false"
                   :toolbar="toolbarOptions"
                   :allowExcelExport="true"
-                  :toolbarClick="toolbarClick"
+                  :toolbarClick="toolbarClickReport7"
                   :allowPaging="false"
                   :allowSorting="true"
                   :allowMultiSorting="true"
@@ -277,13 +278,13 @@
               </v-flex>
               <v-flex md12 lg12>
                 <ejs-grid
-                  ref="grid"
-                  id="Grid"
+                  ref="gridReport8"
+                  id="GridReport8"
                   :dataSource="report8"
                   :allowGrouping="false"
                   :toolbar="toolbarOptions"
                   :allowExcelExport="true"
-                  :toolbarClick="toolbarClick"
+                  :toolbarClick="toolbarClickReport8"
                   :allowPaging="false"
                   :allowSorting="true"
                   :allowMultiSorting="true"
@@ -306,13 +307,13 @@
               </v-flex>
               <v-flex md12 lg12>
                 <ejs-grid
-                  ref="grid"
-                  id="Grid"
+                  ref="gridReport9"
+                  id="GridReport9"
                   :dataSource="report9"
                   :allowGrouping="false"
                   :toolbar="toolbarOptions"
                   :allowExcelExport="true"
-                  :toolbarClick="toolbarClick"
+                  :toolbarClick="toolbarClickReport9"
                   :allowPaging="false"
                   :allowSorting="true"
                   :allowMultiSorting="true"
@@ -335,13 +336,13 @@
               </v-flex>
               <v-flex md12 lg12>
                 <ejs-grid
-                  ref="grid"
-                  id="Grid"
+                  ref="gridReport10"
+                  id="GridReport10"
                   :dataSource="report10"
                   :allowGrouping="false"
                   :toolbar="toolbarOptions"
                   :allowExcelExport="true"
-                  :toolbarClick="toolbarClick"
+                  :toolbarClick="toolbarClickReport10"
                   :allowPaging="false"
                   :allowSorting="true"
                   :allowMultiSorting="true"
@@ -486,10 +487,73 @@ export default {
   },
   methods: {
     //ExportExcel
-    toolbarClick(args) {
-      if (args.item.id === "Grid_excelexport") {
+    toolbarClickReport1(args) {
+      if (args.item.id === "GridReport1_excelexport") {
         // 'Grid_excelexport' -> Grid component id + _ + toolbar item name
-        this.$refs.grid.excelExport();
+        this.$refs.gridReport1.excelExport();
+      }
+    },
+
+    toolbarClickReport2(args) {
+      if (args.item.id === "GridReport2_excelexport") {
+        // 'Grid_excelexport' -> Grid component id + _ + toolbar item name
+        this.$refs.gridReport2.excelExport();
+      }
+    },
+
+    toolbarClickReport3(args) {
+      if (args.item.id === "GridReport3_excelexport") {
+        // 'Grid_excelexport' -> Grid component id + _ + toolbar item name
+        this.$refs.gridReport3.excelExport();
+      }
+    },
+
+    toolbarClickReport4(args) {
+      if (args.item.id === "GridReport4_excelexport") {
+        // 'Grid_excelexport' -> Grid component id + _ + toolbar item name
+        this.$refs.gridReport4.excelExport();
+      }
+    },
+
+    toolbarClickReport5(args) {
+      if (args.item.id === "GridReport5_excelexport") {
+        // 'Grid_excelexport' -> Grid component id + _ + toolbar item name
+        this.$refs.gridReport5.excelExport();
+      }
+    },
+
+    toolbarClickReport6(args) {
+      if (args.item.id === "GridReport6_excelexport") {
+        // 'Grid_excelexport' -> Grid component id + _ + toolbar item name
+        this.$refs.gridReport6.excelExport();
+      }
+    },
+
+    toolbarClickReport7(args) {
+      if (args.item.id === "GridReport7_excelexport") {
+        // 'Grid_excelexport' -> Grid component id + _ + toolbar item name
+        this.$refs.gridReport7.excelExport();
+      }
+    },
+
+    toolbarClickReport8(args) {
+      if (args.item.id === "GridReport8_excelexport") {
+        // 'Grid_excelexport' -> Grid component id + _ + toolbar item name
+        this.$refs.gridReport8.excelExport();
+      }
+    },
+
+    toolbarClickReport9(args) {
+      if (args.item.id === "GridReport9_excelexport") {
+        // 'Grid_excelexport' -> Grid component id + _ + toolbar item name
+        this.$refs.gridReport9.excelExport();
+      }
+    },
+
+    toolbarClickReport10(args) {
+      if (args.item.id === "GridReport10_excelexport") {
+        // 'Grid_excelexport' -> Grid component id + _ + toolbar item name
+        this.$refs.gridReport10.excelExport();
       }
     },
 
