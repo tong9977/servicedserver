@@ -22,6 +22,7 @@ class request extends Model {
   static get relationMappings() {
     const company = require('./company.model')();
     const joblog = require('./joblog.model')();
+    const jobtype = require('./jobtype.model')();
 
     return {
       company: {
@@ -38,6 +39,14 @@ class request extends Model {
         join: {
           from: 'tbRequest.RequestID',
           to: 'tbJobLog.RequestID'
+        }
+      },
+      jobtype:{
+        relation: Model.HasManyRelation,
+        modelClass: jobtype,
+        join: {
+          from: 'tbRequest.JobTypeID',
+          to: 'tbJobType.JobTypeID'
         }
       }
     };

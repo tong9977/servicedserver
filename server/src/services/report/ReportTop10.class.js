@@ -16,16 +16,18 @@ class Service {
 
     var output = [];
     const request = require('../../models/request.model')();
+    const jobTypeModel = require('../../models/jobtype.model')();
 
-    var rawData = await request.query().where('ReqTime', '>=', start).where('ReqTime', '<=', end).where('Status', '!=', '00').where('Status', 'not like', '9%').select('RequestID','JobTypeID','JobTypeDescription');
-    var rawDataJobTypeID = await request.query().where('ReqTime', '>=', start).where('ReqTime', '<=', end).where('Status', '!=', '00').where('Status', 'not like', '9%').distinct('JobTypeID');
-    var rawDataJobTypeName = await request.query().where('ReqTime', '>=', start).where('ReqTime', '<=', end).where('Status', '!=', '00').where('Status', 'not like', '9%').distinct('JobTypeID','JobTypeDescription');
-
-    rawDataJobTypeID.forEach(jobType => {
+    var rawData = await request.query().eager('jobtype').where('ReqTime', '>=', start).where('ReqTime', '<=', end).where('Status', '!=', '00').where('Status', 'not like', '9%');
+    var rawJobTypeGroup = await jobTypeModel.query().where('JobTypeGroupName', '!=', 'null').distinct('JobTypeGroupName');
+   
+    rawJobTypeGroup.forEach(groupName => {
       var c = {};
       c['ลำดับ'] = 0;
-      c['หัวข้อเรื่องแจ้งซ่อมหลัก'] = rawDataJobTypeName.filter(x => x.JobTypeID == jobType.JobTypeID);
-      c['จำนวน'] = rawData.filter(x => x.JobTypeID == jobType.JobTypeID).length;
+      c['หัวข้อเรื่องแจ้งซ่อมหลัก'] = groupName;
+      c['จำนวน'] = rawData.filter(x => { 
+        return x.jobtype.JobTypeGroupName == groupName 
+      });
       c['ร้อยละ'] = 0;
 
       output.push(c);
@@ -35,7 +37,7 @@ class Service {
 
     output.push(ct);
 
-    return output.sort(function(b, a){return b-a});;
+    return output;
   }
 
 }

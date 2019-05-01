@@ -1,144 +1,155 @@
 <template>
-  <v-container fill-height fluid grid-list-xl>
-    <v-flex md12 lg12>
-      <material-card color="orange" title="Admin">
-        <!-- <v-flex md12 lg12>
+  <v-container fluid grid-list-xl>
+    <v-layout row wrap>
+      <v-flex md12 lg12>
+        <material-card color="orange" title="Admin">
+          <!-- <v-flex md12 lg12>
                 <div>
                   <button-item @TestEmitEvnet="testEmtiEventFromButton"></button-item>
                 </div>
-        </v-flex>-->
-        <v-layout wrap>
-          <v-flex md2 lg2>
-            สถานะ
-            <v-combobox
-              v-model="statusSelect"
-              :items="jobStatus"
-              item-text="statusName"
-              item-value="statusID"
-              label="เลือกสถานะงาน"
-            ></v-combobox>
-          </v-flex>
+          </v-flex>-->
+          <v-layout row wrap>
+            <v-flex md2 lg2>
+              สถานะ
+              <v-combobox
+                v-model="statusSelect"
+                :items="jobStatus"
+                item-text="statusName"
+                item-value="statusID"
+                label="เลือกสถานะงาน"
+              ></v-combobox>
+            </v-flex>
 
-          <v-flex md4 lg4>
-            กรองตามพื้นที่
-            <v-combobox
-              v-model="companySelect"
-              :items="companys"
-              item-text="CompanyName"
-              item-value="CompanyID"
-              label="เลือกหน่วยงาน"
-              multiple
-            ></v-combobox>
-          </v-flex>
-          <v-flex md2 lg2>
-            กรองตาม RM Group
-            <v-combobox
-              v-model="RMGroupIDSelect"
-              :items="RMGroups"
-              item-text="ZoneCode"
-              item-value="ZoneID"
-              label="เลือก RM Group"
-            ></v-combobox>
-          </v-flex>
-          <v-flex md2 lg2>
-            กรองตามทีมช่าง
-            <v-combobox
-              v-model="technicianBelongSelect"
-              :items="technicianBelongs"
-              item-text="TechnicianBelongName"
-              item-value="TechnicianBelongID"
-              label="เลือกทีมช่าง"
-            ></v-combobox>
-          </v-flex>
-          <v-flex md2 lg2>
-            กรองตามช่างซ่อมเสร็จ
-            <v-combobox
-              v-model="jobFixed"
-              :items="repairsStatus"
-              item-text="statusName"
-              item-value="status"
-              label="เลือกทีมช่าง"
-            ></v-combobox>
-          </v-flex>
-          <v-flex md3 lg3>
-            กรองตามความเร่งด่วน
-            <v-combobox
-              v-model="damageSelect"
-              :items="damages"
-              item-text="damageName"
-              item-value="damage"
-              label="เลือกความเร่งด่วน"
-            ></v-combobox>
-          </v-flex>
-          <v-flex md2 lg2>
-            กรองตามวันที่
-            <v-combobox
-              v-model="dateChoiceSelect"
-              :items="dateChoice"
-              item-text="dateChoiceName"
-              item-value="dateChoiceID"
-              label="เลือกวัน"
-            ></v-combobox>
-          </v-flex>
-          <v-flex md2 lg2>
-            เริ่ม
-            <ejs-datepicker
-              style="padding-top:20px;"
-              placeholer="วันเริ่ม"
-              v-model="startDate"
-              :format="dateFormat"
-            ></ejs-datepicker>
-          </v-flex>
-          <v-flex md2 lg2>
-            สิ้นสุด
-            <ejs-datepicker
-              style="padding-top:20px;"
-              placeholer="วันสิ้นสุด"
-              v-model="endDate"
-              :format="dateFormat"
-            ></ejs-datepicker>
-          </v-flex>
+            <v-flex md4 lg4>
+              กรองตามพื้นที่
+              <v-combobox
+                v-model="companySelect"
+                :items="companys"
+                item-text="CompanyName"
+                item-value="CompanyID"
+                label="เลือกหน่วยงาน"
+                multiple
+              ></v-combobox>
+            </v-flex>
+            <v-flex md2 lg2>
+              กรองตาม RM Group
+              <v-combobox
+                v-model="RMGroupIDSelect"
+                :items="RMGroups"
+                item-text="ZoneCode"
+                item-value="ZoneID"
+                label="เลือก RM Group"
+              ></v-combobox>
+            </v-flex>
+            <v-flex md2 lg2>
+              กรองตามทีมช่าง
+              <v-combobox
+                v-model="technicianBelongSelect"
+                :items="technicianBelongs"
+                item-text="TechnicianBelongName"
+                item-value="TechnicianBelongID"
+                label="เลือกทีมช่าง"
+              ></v-combobox>
+            </v-flex>
+            <v-flex md2 lg2>
+              กรองตามช่างซ่อมเสร็จ
+              <v-combobox
+                v-model="jobFixed"
+                :items="repairsStatus"
+                item-text="statusName"
+                item-value="status"
+                label="เลือกทีมช่าง"
+              ></v-combobox>
+            </v-flex>
+            <v-flex md3 lg3>
+              กรองตามความเร่งด่วน
+              <v-combobox
+                v-model="damageSelect"
+                :items="damages"
+                item-text="damageName"
+                item-value="damage"
+                label="เลือกความเร่งด่วน"
+              ></v-combobox>
+            </v-flex>
+            <v-flex md2 lg2>
+              กรองตามวันที่
+              <v-combobox
+                v-model="dateChoiceSelect"
+                :items="dateChoice"
+                item-text="dateChoiceName"
+                item-value="dateChoiceID"
+                label="เลือกวัน"
+              ></v-combobox>
+            </v-flex>
+            <v-flex md2 lg2>
+              เริ่ม
+              <ejs-datepicker
+                style="padding-top:20px;"
+                placeholer="วันเริ่ม"
+                v-model="startDate"
+                :format="dateFormat"
+              ></ejs-datepicker>
+            </v-flex>
+            <v-flex md2 lg2>
+              สิ้นสุด
+              <ejs-datepicker
+                style="padding-top:20px;"
+                placeholer="วันสิ้นสุด"
+                v-model="endDate"
+                :format="dateFormat"
+              ></ejs-datepicker>
+            </v-flex>
 
-          <v-flex md3 lg3>
-            กรองตามเลขใบงาน
-            <v-text-field
-              label="กรอกเลขใบงาน"
-              class="purple-input"
-              :value="requestID"
-              v-model="requestID"
-            />
-          </v-flex>
-          <v-flex md3 lg3>
-            กรองตามรหัสช่าง (ใส่เลขรหัสช่าง)
-            <v-text-field
-              label="กรอกรหัสช่าง"
-              class="purple-input"
-              :value="technicianMainID"
-              v-model="technicianMainID"
-            />
-          </v-flex>
-          <v-flex md4 lg4>
-            กรองใบงาน
-            <v-layout row wrap>
-              <v-checkbox v-model="notCancelJobSelect" label="ไม่แสดงยกเลิก" value="1"></v-checkbox>
-              <v-checkbox v-model="dadJobTypeSelect" label="ไม่แสดงงานสร้าง" value="2"></v-checkbox>
-            </v-layout>
-          </v-flex>
-          <v-flex md2 lg2>
-            <v-btn round color="primary" @click="OK()">OK</v-btn>
-          </v-flex>
-        </v-layout>
+            <v-flex md3 lg3>
+              กรองตามเลขใบงาน
+              <v-text-field
+                label="กรอกเลขใบงาน"
+                class="purple-input"
+                :value="requestID"
+                v-model="requestID"
+              />
+            </v-flex>
+            <v-flex md3 lg3>
+              กรองตามรหัสช่าง (ใส่เลขรหัสช่าง)
+              <v-text-field
+                label="กรอกรหัสช่าง"
+                class="purple-input"
+                :value="technicianMainID"
+                v-model="technicianMainID"
+              />
+            </v-flex>
+            <v-flex md4 lg4>
+              กรองใบงาน
+              <v-layout row wrap>
+                <v-checkbox v-model="notCancelJobSelect" label="ไม่แสดงยกเลิก" value="1"></v-checkbox>
+                <v-checkbox v-model="dadJobTypeSelect" label="ไม่แสดงงานสร้าง" value="2"></v-checkbox>
+              </v-layout>
+            </v-flex>
+            <v-flex md2 lg2>
+              <v-btn round color="primary" @click="OK()">OK</v-btn>
+            </v-flex>
+          </v-layout>
+        </material-card>
+      </v-flex>
+    </v-layout>
 
+    <v-layout row wrap>
+      <!-- <v-card>
+         <v-card-title> -->
         <v-flex md12 lg12>
           จำนวนทั้งหมด {{ total }} ใบงาน
           <ejs-grid
-            ref="grid"
             id="Grid"
+            ref="grid"
             :dataSource="jobs"
-            :allowGrouping="true"
+            :allowGrouping="false"
             :toolbar="toolbarOptions"
             :allowExcelExport="true"
-            :toolbarClick="toolbarClick">
+            :toolbarClick="toolbarClick"
+            :allowPaging="false"
+            :allowSorting="true"
+            :allowMultiSorting="true"
+          >
             <e-columns>
               <e-column field="RequestID" headerText="รหัส" width="150"></e-column>
               <e-column field="Damage" headerText="Urgent" width="120"></e-column>
@@ -184,9 +195,10 @@
               <!--<e-column field="" headerText="" width="120"></e-column>-->
             </e-columns>
           </ejs-grid>
-        </v-flex>
-      </material-card>
-    </v-flex>
+         </v-flex>
+        <!-- </v-card-title> 
+      </v-card>-->
+    </v-layout>
   </v-container>
 </template>
 
@@ -369,7 +381,7 @@ export default {
         //ไม่แสดงยกเลิก
         if (this.notCancelJobSelect === "1") {
           // q.Status.$nin = [90, 91, 92, 93, 94, 95, 96, 97, 98, 99];
-          q.Status = { $nin : [90, 91, 92, 93, 94, 95, 96, 97, 98, 99] };
+          q.Status = { $nin: [90, 91, 92, 93, 94, 95, 96, 97, 98, 99] };
         }
       }
 
@@ -377,7 +389,7 @@ export default {
         //predicate.And(x => x.DadJobType != "งานสร้าง" || x.DadJobType == null);
         if (this.dadJobTypeSelect === "2") {
           //q.DadJobType = "งานสร้าง";
-          q.DadJobType = { $nin : ["งานสร้าง"] };
+          q.DadJobType = { $nin: ["งานสร้าง"] };
         }
       }
 
@@ -387,7 +399,6 @@ export default {
 
       //alert(JSON.stringify(q));
       Job.find({ query: q }).then(res => {
-        console.log(JSON.stringify(res.data));
         this.total = res.total;
         this.jobs = res.data;
       });

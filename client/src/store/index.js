@@ -41,6 +41,7 @@ const store = new Vuex.Store({
         service('reportbytablet2',{modelName:'ReportByTablet2'}), //8
         service('reportbystatus',{modelName:'ReportByStatus'}), //9
         service('reportbystatus2',{modelName:'ReportByStatus2'}), //10
+        service('reporttop10',{modelName:'Reporttop10'}), //11
 
         service('reportforrm1',{modelName:'ReportForRM1'}), //1
         service('reportforrm2',{modelName:'ReportForRM2'}), //2

@@ -13,22 +13,6 @@ class jobtype extends Model {
     return 'JobTypeID';
   }
 
-  //Add New Relation
-  static get relationMappings() {
-    const jobtype = require('./jobtype.model')();
-
-    return {
-      jobtype: {
-        relation: Model.HasOneRelation,
-        modelClass: jobtype,
-        join: {
-          from: 'tbRequest.JobTypeID',
-          to: 'tbJobType.JobTypeID'
-        }
-      },
-    };
-  }
-
   $beforeInsert() {
    
   }
@@ -39,6 +23,7 @@ class jobtype extends Model {
 }
 
 module.exports = function (app) {
-  
+ 
+
   return jobtype;
 };

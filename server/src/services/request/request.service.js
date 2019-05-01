@@ -12,7 +12,12 @@ module.exports = function (app) {
     paginate,
     id:"RequestID",
     whitelist: ['$eager', '$joinRelation'],
-    allowedEager: '[joblogs,company]'
+    allowedEager: '[joblogs,company, jobtype]',
+    namedEagerFilters: {
+      unDone: function(builder) {
+        builder.where('done', false);
+      }
+    },
   };
 
   // Initialize our service with any options it requires
