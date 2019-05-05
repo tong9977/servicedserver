@@ -27,8 +27,8 @@ class Service {
     });
 
     //Context.tbRequests.Where(c => c.ReqTime.Year.ToString() == year && c.ZoneID == Convert.ToInt32(zoneID) && c.Status != "00" && !c.Status.StartsWith("9")).ToList();
-    var rawData = await request.query().where('ReqTime','>=', start).where('Status', '!=', '00').where('ReqTime','<=', end).where('Status', 'not like', '9%').select('CompanyName','RequestID','DadJobType');
-    var rawCompany = await request.query().where('ReqTime','>=', start).where('Status', '!=', '00').where('ReqTime','<=', end).where('Status', 'not like', '9%').distinct('CompanyName');
+    var rawData = await request.query().where('ReqTime','>=', start).where('ReqTime','<=', end).where('Status', '!=', '00').where('Status', 'not like', '9%').select('CompanyName','RequestID','DadJobType');
+    var rawCompany = await request.query().where('ReqTime','>=', start).where('ReqTime','<=', end).where('Status', '!=', '00').where('Status', 'not like', '9%').distinct('CompanyName');
 
     //Test map
     let res = rawData.map(item => item.RequestID)

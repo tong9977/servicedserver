@@ -350,7 +350,27 @@
               </v-flex>
             </v-tab-item>
             <v-tab-item>
-              จัดลำดับ
+              <v-flex md12 lg12>
+              การจัดเรียงลำดับเรื่องแจ้งซ่อม ประจำปี : {{yearSelect}}
+                <span
+                  v-if="monthShow != null"
+                >เดือน :</span>
+                {{ monthShow }}
+              </v-flex>
+              <v-flex md12 lg12>
+                <ejs-grid
+                  ref="gridReport11"
+                  id="GridReport11"
+                  :dataSource="report11"
+                  :allowGrouping="false"
+                  :toolbar="toolbarOptions"
+                  :allowExcelExport="true"
+                  :toolbarClick="toolbarClickReport11"
+                  :allowPaging="false"
+                  :allowSorting="true"
+                  :allowMultiSorting="true"
+                ></ejs-grid>
+              </v-flex>
             </v-tab-item>
           </v-tabs>
 
@@ -419,6 +439,9 @@ export default {
       //แยกตามสถานะ (ทีมช่าง)
       report10: null,
       report10Summary: null,
+      //10 อันดับ
+      report11: null,
+      report11Summary: null,
 
       years: [2019, 2018],
       yearSelect: [yyyy],
@@ -557,6 +580,13 @@ export default {
       }
     },
 
+    toolbarClickReport11(args) {
+      if (args.item.id === "GridReport11_excelexport") {
+        // 'Grid_excelexport' -> Grid component id + _ + toolbar item name
+        this.$refs.gridReport11.excelExport();
+      }
+    },
+
     async getData() {
       const { Report } = this.$FeathersVuex;
       const q = {};
@@ -684,6 +714,17 @@ export default {
         .then(res => {
           this.report10 =  res[0].data;
           this.report10Summary = res[0].summary;
+        })
+        .catch(error => {
+          console.log(error);
+        });
+
+      //11 10 อันดับ
+      this.$store
+        .dispatch("reporttop10/find", { query: q })
+        .then(res => {
+          this.report11 =  res[0].data;
+          this.report11Summary = res[0].summary;
         })
         .catch(error => {
           console.log(error);
